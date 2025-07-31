@@ -6,10 +6,10 @@ from pygame.locals import *
 
 
 class Button ():
-    def __init__(self,x,y, image,scale):
+    def __init__(self,name,x,y, image,scale):
+        self.name=name
         width = image.get_width()
         height= image.get_height()
-        
         self.image=pygame.transform.scale(image,(int(width*scale),int(height*scale)))
         self.rect=self.image.get_rect()
         self.rect.topleft = (x,y)
@@ -31,7 +31,7 @@ class Button ():
         screen.blit(self.image,((self.rect.x),(self.rect.y)))
 
         return action
-
+    
 
 
 
@@ -55,10 +55,10 @@ love_img = pygame.image.load('buttons/love.png').convert_alpha()
 sleep_img = pygame.image.load('buttons/sleep.png').convert_alpha()
 
 
-exercise_button = Button(0,HEIGHT*0.75,exercise_img,0.75)
-feed_button = Button(WIDTH*0.25,HEIGHT*0.75,feed_img,0.75)
-sleep_button = Button(WIDTH*0.5,HEIGHT*0.75,sleep_img,0.75)
-love_button = Button(WIDTH*0.75,HEIGHT*0.75,love_img,0.75)
+exercise_button = Button('exercise',0,HEIGHT*0.75,exercise_img,0.75)
+feed_button = Button('feed',WIDTH*0.25,HEIGHT*0.75,feed_img,0.75)
+sleep_button = Button('sleep',WIDTH*0.5,HEIGHT*0.75,sleep_img,0.75)
+love_button = Button('love',WIDTH*0.75,HEIGHT*0.75,love_img,0.75)
 
 
 
@@ -84,23 +84,34 @@ gameIsRun=True
 
 #background and window configs
 
-
+def readButtons():
+    if exercise_button.draw():
+        print("exercise")
+        newPet.goExercise()
+    if feed_button.draw():
+        print("feed")
+        newPet.goEat()
+    if sleep_button.draw():
+        print("sleep")
+        newPet.goSleep()
+    if love_button.draw():
+        print("love") 
+        newPet.giveLove()
 
 
 
 while gameIsRun:
     pygame.display.update()
-    if exercise_button.draw():
-        print("exercise")
-    if feed_button.draw():
-        print("feed")
-    if sleep_button.draw():
-        print("sleep")
-    if love_button.draw():
-        print("love")
+    readButtons()
         
     for event in pygame.event.get(): #quit game
         if event.type == pygame.QUIT:
             gameIsRun = False
                         
 
+#TO DO
+
+#TEENAGER
+#ADULT
+#SENIOR
+#ONE SPRITE PER EACH
