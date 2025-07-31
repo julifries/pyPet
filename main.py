@@ -4,6 +4,38 @@ from pygame.locals import *
 
 
 
+
+class Button ():
+    def __init__(self,x,y, image,scale):
+        width = image.get_width()
+        height= image.get_height()
+        
+        self.image=pygame.transform.scale(image,(int(width*scale),int(height*scale)))
+        self.rect=self.image.get_rect()
+        self.rect.topleft = (x,y)
+        self.clicked = False
+    def draw(self):
+        action = False
+        pos=pygame.mouse.get_pos()
+        
+        
+        #check mouseover and clicked connections
+        if self.rect.collidepoint(pos):
+                if pygame.mouse.get_pressed()[0]==1 and self.clicked ==False:
+                        self.clicked = True
+                        print('CLICKED')
+                        action=True
+        if pygame.mouse.get_pressed ()[0]==0:
+                self.clicked = False
+        #draw button on screen
+        screen.blit(self.image,((self.rect.x),(self.rect.y)))
+
+        return action
+
+
+
+
+
 WIDTH = 2000
 HEIGHT = 1000
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
@@ -12,11 +44,21 @@ background_colour= (221,221,221)
 screen.fill(background_colour)
 
 
+
+
+
+
+#pics
 exercise_img = pygame.image.load('buttons/exercise.png').convert_alpha()
 feed_img = pygame.image.load('buttons/feed.png').convert_alpha()
 love_img = pygame.image.load('buttons/love.png').convert_alpha()
 sleep_img = pygame.image.load('buttons/sleep.png').convert_alpha()
 
+
+exercise_button = Button(0,HEIGHT*0.75,exercise_img,0.75)
+feed_button = Button(WIDTH*0.25,HEIGHT*0.75,feed_img,0.75)
+sleep_button = Button(WIDTH*0.5,HEIGHT*0.75,sleep_img,0.75)
+love_button = Button(WIDTH*0.75,HEIGHT*0.75,love_img,0.75)
 
 
 
@@ -47,8 +89,18 @@ gameIsRun=True
 
 
 while gameIsRun:
-        for event in pygame.event.get(): #quit game
-                if event.type == pygame.QUIT:
-                        gameIsRun=False
+    pygame.display.update()
+    if exercise_button.draw():
+        print("exercise")
+    if feed_button.draw():
+        print("feed")
+    if sleep_button.draw():
+        print("sleep")
+    if love_button.draw():
+        print("love")
+        
+    for event in pygame.event.get(): #quit game
+        if event.type == pygame.QUIT:
+            gameIsRun = False
                         
-        pygame.display.update()
+
