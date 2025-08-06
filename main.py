@@ -61,6 +61,13 @@ sleep_button = Button('sleep',WIDTH*0.5,HEIGHT*0.75,sleep_img,0.75)
 love_button = Button('love',WIDTH*0.75,HEIGHT*0.75,love_img,0.75)
 
 
+#sprites
+egg_img=pygame.image.load('petSprites/egg.png').convert_alpha()
+baby_img=pygame.image.load('petSprites/baby.png').convert_alpha()
+child_img=pygame.image.load('petSprites/child.png').convert_alpha()
+teenager_img=pygame.image.load('petSprites/teenager.png').convert_alpha()
+adult_img=pygame.image.load('petSprites/adult.png').convert_alpha()
+senior_img=pygame.image.load('petSprites/senior.png').convert_alpha()
 
 
 def every10SEC (pet):
